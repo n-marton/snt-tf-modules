@@ -31,12 +31,6 @@ resource "azurerm_subnet" "vss" {
   address_prefix       = "${element(var.vn_subnets, count.index)}"
 }
 
-# this resource below has a bug which cause an inplace update 
-# on every run, it is harmless but annoying 
-# issue: https://github.com/terraform-providers/terraform-provider-azurerm/issues/2938
-# fixed: https://github.com/terraform-providers/terraform-provider-azurerm/pull/2939
-# it will be fixed in v1.23.0
-
 resource "azurerm_policy_definition" "pd" {
   name         = "samplepd"
   policy_type  = "Custom"
